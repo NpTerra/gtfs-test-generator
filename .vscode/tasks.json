@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Maven (wrapper): compile",
+      "type": "shell",
+      "command": "${workspaceFolder}/mvnw",
+      "args": [
+        "-B",
+        "compile"
+      ],
+      "windows": {
+        "command": "${workspaceFolder}\\mvnw.cmd"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [
+        "$maven-compile"
+      ]
+    }
+  ]
+}

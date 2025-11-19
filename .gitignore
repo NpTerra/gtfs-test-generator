@@ -32,7 +32,9 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+.vscode/*
+!.vscode/tasks.json
+!.vscode/launch.json
 
 ### Mac OS ###
 .DS_Store

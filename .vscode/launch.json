@@ -1,0 +1,23 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launcher with Maven Compile",
+            "request": "launch",
+            "mainClass": "dev.rnandor.gtfstestgenerator/dev.rnandor.gtfstestgenerator.Launcher",
+            "projectName": "gtfs-test-generator",
+            "preLaunchTask": "Maven (wrapper): compile"
+        },
+        {
+          "type": "java",
+          "name": "Launcher",
+          "request": "launch",
+          "mainClass": "dev.rnandor.gtfstestgenerator/dev.rnandor.gtfstestgenerator.Launcher",
+          "projectName": "gtfs-test-generator"
+        }
+    ]
+}
