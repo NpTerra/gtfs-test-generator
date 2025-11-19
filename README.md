@@ -7,3 +7,7 @@
     - *(Just don't forget to add the trips for each line at the end of a model.)*
 5. 😎 Run the program again with either **'Launcher with Maven compile'** or the normal **'Launcher'** configuration.
 6. 💯 __*Profit*__
+
+## Extra
+
+- [YAML Syntax how-to](https://learnxinyminutes.com/yaml/)
