@@ -55,8 +55,8 @@ arrange:
           # here we don't specify arrival, so it will default to 00:00:00
   calendar:
     - id: 1
-      start: 2021-01-01
-      end: 2021-12-31
+      start: 2021-01-01   # you probably want to change these as well to the ones
+      end: 2021-12-31     # you got as an example test in your own repo
       availability: [1, 0, 1, 0, 1, 0, 1] # Monday to Sunday, 0 = unavailable, 1 = available
   trips:
     - id: 1 # unique identifier for the trip
