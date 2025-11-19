@@ -26,7 +26,11 @@ public class GTFSApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);*/
 
-        Files.copy(getClass().getResource("examples/input.yaml").openStream(), Path.of("tests/example.yaml"), StandardCopyOption.REPLACE_EXISTING);
+        File testDir = new File("tests");
+        if(!testDir.exists())
+            testDir.mkdir();
+
+        Files.copy(getClass().getResource("examples/input.yaml").openStream(), testDir.toPath().resolve("example.yaml"), StandardCopyOption.REPLACE_EXISTING);
 
         var testsDir = new File("tests");
         for(var testFile : testsDir.listFiles()) {
