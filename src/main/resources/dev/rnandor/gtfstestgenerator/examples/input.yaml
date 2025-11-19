@@ -1,0 +1,97 @@
+# The name of the test.
+# This will determine the directory name the output files will be written to.
+name: example_test
+
+# A short description of the test.
+# This will be written to description.txt in the output directory.
+description: |-
+  This is an example test.
+  It is used to test the generator.
+  It is not meant to be used otherwise.
+
+# Act phase
+# This is what the test does and what will be written to act.txt
+act: |-
+  METHOD_NAME
+  <PARAMETERS>
+
+agency:
+  name: Your Transit Agency
+  url: http://www.yourtransitagency.com
+  timezone: America/New_York
+  language: en
+  phone: 123-456-7890 # example phone number, you MUST change this to the one you got
+
+# Randomise offsets for the coordinates to try to avoid plagiarism with similar tests.
+# If this is set to true, the generator will generate a random offset for each coordinate.
+# The offsets are between [-60, 60] for latitude and [-150, 150] for longitude.
+randomizeOffsets: true
+
+# Arrange phase
+# This is what the model looks like before the test is run
+# It is used to generate arrange.zip.
+arrange:
+  stations:
+    # the station is specified with [id, x, y, isGPS] or [id, lat, lon, isGPS]
+    # where the isGPS binary flag determines whether GPS or map coordinates are being used
+    - A: [ 1, 0, 0, 0 ]
+    - B: [ 2, 10, 20, 0 ]
+    - 'Station C': [ 3, 15, 25, 0 ] # you can use quotes to specify station names with spaces
+  lines:
+    - id: 1
+      name: Line 1
+      short_name: L1
+      color: '#FF0000'
+      type: 1
+      stops:
+        - name: A
+          arrival: 08:00:00 # optional, defaults to 00:00:00
+          departure: 08:05:00 # optional, defaults to 00:00:00
+
+          # station ID can be specified instead of name
+          # this is useful if there are multiple stations with the same name
+        - id: 2
+          departure: 08:06:00
+          # here we don't specify arrival, so it will default to 00:00:00
+  calendar:
+    - id: 1
+      start: 2021-01-01
+      end: 2021-12-31
+      availability: [1, 0, 1, 0, 1, 0, 1] # Monday to Sunday, 0 = unavailable, 1 = available
+  trips:
+    - id: 1 # unique identifier for the trip
+      line: 1 # line ID
+      service: 1 # calendar ID
+
+# Assert phase
+# This is what is expected to happen after the test is run
+#
+# If the 'exception' field is present, it means that an exception is expected to be thrown.
+# Otherwise, the 'model' field is expected to be the final model after the test is run.
+# Depending on the given field, either assert.txt or assert.zip will be generated.
+#
+# The calendar field is optional inside this model.
+# If it's not present, it will be taken from the 'arrange' phase.
+expected:
+  #exception: INVALID_ARGUMENT
+  model:
+    stations:
+      - A: [ 1, 0, 0, 0 ]
+      - B: [ 2, 10, 20, 0 ]
+    lines:
+      - id: 1
+        name: Line 1
+        short_name: L1
+        color: '#FF0000'
+        type: 1
+        stops:
+          - name: A
+            arrival: 08:00
+            departure: 08:05
+          - id: 2
+            arrival: 08:05
+            departure: 08:06
+    trips:
+      - id: 1
+        line: 1
+        service: 1
