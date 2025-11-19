@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class GTFSApplication extends Application {
 
@@ -29,6 +30,8 @@ public class GTFSApplication extends Application {
         File testDir = new File("tests");
         if(!testDir.exists())
             testDir.mkdir();
+
+        purgeDirectory(Path.of("generated"));
 
         Files.copy(getClass().getResource("examples/input.yaml").openStream(), testDir.toPath().resolve("example.yaml"), StandardCopyOption.REPLACE_EXISTING);
 
@@ -53,5 +56,20 @@ public class GTFSApplication extends Application {
 
         stage.show();
         stage.close();
+    }
+
+    private void purgeDirectory(Path dir) throws IOException {
+        if(!Files.exists(dir)) return;
+
+        try(var stream = Files.walk(dir)) {
+            stream.sorted(Comparator.reverseOrder()) // delete children first
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+        }
     }
 }
